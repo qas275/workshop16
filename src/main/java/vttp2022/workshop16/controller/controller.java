@@ -1,5 +1,7 @@
 package vttp2022.workshop16.controller;
 
+import java.io.InputStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,16 @@ public class controller {
     public ResponseEntity<String> postUser(@RequestBody String payload){
         
         JsonObject body;
+        try (InputStream is = new ByteArrayInputStream(payload.getBytes()) 
+        {
+            JsonReader reader = Json.createReader(is);
+            body = read.readObject();
+        } catch(Exception e) 
+        {   System.err.println(e);}
 
-        
+
+
+
 
 
     }
