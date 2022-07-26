@@ -1,5 +1,6 @@
 package vttp2022.workshop16.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import org.slf4j.Logger;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 
 @RestController
 public class controller {
@@ -20,14 +23,12 @@ public class controller {
     public ResponseEntity<String> postUser(@RequestBody String payload){
         
         JsonObject body;
-        try (InputStream is = new ByteArrayInputStream(payload.getBytes()) 
+        try (InputStream is = new ByteArrayInputStream(payload.getBytes())) 
         {
             JsonReader reader = Json.createReader(is);
-            body = read.readObject();
-        } catch(Exception e) 
+            body = reader.readObject();
+        } catch (Exception e) 
         {   System.err.println(e);}
-
-
 
 
 
