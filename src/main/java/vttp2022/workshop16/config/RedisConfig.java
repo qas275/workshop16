@@ -12,6 +12,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -47,9 +48,11 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>(); //instantiate the empty redis template or local database
         template.setConnectionFactory(jedisFac); //populate the data from the redis database online
         template.setKeySerializer(new StringRedisSerializer()); //set keys as string, allows for serialization as string
-
-        RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader()); //choose type of serialization as object to allow for all objects
-        template.setValueSerializer(serializer);//set the template's serialization as above
+        template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
+        template.setHashKeySerializer(new GenericJackson2JsonRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        // RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader()); //choose type of serialization as object to allow for all objects
+        // template.setValueSerializer(serializer);//set the template's serialization as above
         return template;
     }
 }
