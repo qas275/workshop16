@@ -13,37 +13,37 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "type",
-    "count"
+    "total_count",
+    "file"
 })
 @Generated("jsonschema2pojo")
-public class Type {
+public class Rulebook {
 
-    @JsonProperty("type")
-    private String type;
-    @JsonProperty("count")
-    private Integer count;
+    @JsonProperty("total_count")
+    private Integer totalCount;
+    @JsonProperty("file")
+    private String file;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("type")
-    public String getType() {
-        return type;
+    @JsonProperty("total_count")
+    public Integer getTotalCount() {
+        return totalCount;
     }
 
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
+    @JsonProperty("total_count")
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
-    @JsonProperty("count")
-    public Integer getCount() {
-        return count;
+    @JsonProperty("file")
+    public String getFile() {
+        return file;
     }
 
-    @JsonProperty("count")
-    public void setCount(Integer count) {
-        this.count = count;
+    @JsonProperty("file")
+    public void setFile(String file) {
+        this.file = file;
     }
 
     @JsonAnyGetter
